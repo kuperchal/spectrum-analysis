@@ -1,29 +1,33 @@
-
 import os
 from itertools import chain
 from jcamp import JCAMP_reader
 import numpy as np
 
-
+# CONSTANTS, DO NOT CHANGE
+dataset_path = './dataset'
+directory_path = 'directory_path'
 dataset_file_extension = '.dx'
 dataset_file_extension_index = -1
 
 
-def load_dataset():
-    return 0
-
-
-def load_dataset_from_dir(directory_path):
+# This function allows you to load all data from all directories contained in './dataset' or chosen directory
+def load_dataset(**kwargs):
+    # Check for params
+    if directory_path in kwargs:
+        # If param found -> load data from directory passed
+        dataset_loading_path = kwargs[directory_path]
+    else:
+        # If not -> load whole dataset dir
+        dataset_loading_path = dataset_path
     dataset = {}
-    # Walk around passed directory
-    for root, directories, files in os.walk(directory_path):
-        # For each file found in the directory
+    for root, directories, files in os.walk(dataset_loading_path):
         for dataset_file in files:
             # If file extension is '.dx'
             if os.path.splitext(dataset_file).__getitem__(dataset_file_extension_index) == dataset_file_extension:
-                print('Loading data from ' + dataset_file)
                 # Receive file path
                 file_path = os.path.join(root, dataset_file)
+                # Logging
+                print('Loading data from ' + file_path)
                 # Read received file with JCAMP
                 spectra = JCAMP_reader(file_path)
                 # Transmission is vertical axis
