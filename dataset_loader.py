@@ -1,9 +1,9 @@
-import os
-from itertools import chain
-from jcamp import JCAMP_reader
 import numpy as np
+import os
 
-# CONSTANTS, DO NOT CHANGE
+from jcamp import JCAMP_reader
+
+# CONSTANTS
 dataset_path = './dataset'
 directory_path = 'directory_path'
 dataset_file_extension = '.dx'
