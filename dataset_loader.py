@@ -1,12 +1,15 @@
+# -*- coding: utf-8 -*-
 import numpy as np
 import os
 
-from jcamp import JCAMP_reader
+# from jcamp import JCAMP_reader
+from reader import JCAMP_reader
 
 # CONSTANTS
 dataset_path = './dataset'
 directory_path = 'directory_path'
 dataset_file_extension = '.dx'
+dx_file_encoding="latin-1"
 dataset_file_extension_index = -1
 
 
@@ -29,7 +32,7 @@ def load_dataset(**kwargs):
                 # Logging
                 print('Loading data from ' + file_path)
                 # Read received file with JCAMP
-                spectra = JCAMP_reader(file_path)
+                spectra = JCAMP_reader(file_path, dx_file_encoding)
                 # Transmission is vertical axis
                 transmission = spectra['y']
                 # Stack up the results to the returned dataset as (k = './dataset/data-.../', v = transmission)
